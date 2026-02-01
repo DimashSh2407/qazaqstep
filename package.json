@@ -1,0 +1,24 @@
+{
+  "name": "qazaqstep",
+  "version": "1.0.0",
+  "description": "QazaqStep - Kazakh Language Learning Platform MVP",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "seed": "node backend/seed/seedData.js"
+  },
+  "keywords": ["kazakh", "language", "learning", "edtech"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
+

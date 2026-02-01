@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson - QazaqStep</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><a href="/" style="text-decoration: none; color: inherit;">QazaqStep</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Lesson Header -->
+            <div class="lesson-header">
+                <a href="lessons.html" class="back-link">← Back to Lessons</a>
+                <h2 class="lesson-title" id="lessonTitle">Loading...</h2>
+                <div class="lesson-meta">
+                    <span class="lesson-level" id="lessonLevel">A1</span>
+                    <span class="lesson-duration" id="lessonDuration">15 min</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="lesson-progress-section">
+                <div class="lesson-progress-bar">
+                    <div class="lesson-progress-fill" id="lessonProgressFill"></div>
+                </div>
+                <div class="lesson-stats">
+                    <span>Points: <strong id="lessonPoints">0</strong></span>
+                    <span>Streak: <strong id="lessonStreak">0 days</strong></span>
+                </div>
+            </div>
+
+            <!-- Grammar Section -->
+            <section class="lesson-section">
+                <h3 class="section-heading">📖 Grammar</h3>
+                <div class="grammar-card">
+                    <p class="grammar-text" id="grammarText"></p>
+                    <div class="example-box">
+                        <strong>Example:</strong>
+                        <p id="grammarExample"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Test Section -->
+            <section class="lesson-section" id="test">
+                <h3 class="section-heading">✏️ Mini Test</h3>
+                <div class="test-container" id="testContainer">
+                    <!-- Test questions will be loaded here -->
+                </div>
+                <button class="btn-primary" id="checkAnswersBtn" style="display: none;">Check Answers</button>
+                <div id="testResults" style="display: none;"></div>
+            </section>
+
+            <!-- Audio Dialogue Section -->
+            <section class="lesson-section" id="audio">
+                <h3 class="section-heading">🎧 Audio Dialogue</h3>
+                <div class="audio-card">
+                    <p class="shadowing-instruction">
+                        <strong>Shadowing Practice:</strong> Listen to the dialogue and repeat after the speaker. 
+                        Try to match their pronunciation and rhythm. This helps improve your speaking fluency.
+                    </p>
+                    <div class="audio-player">
+                        <button class="btn-primary audio-btn" id="playAudioBtn">
+                            ▶️ Play Audio
+                        </button>
+                        <p class="audio-note">Note: Audio simulation - in production, this would play actual dialogue</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Cards Section -->
+            <section class="lesson-section" id="vocabulary">
+                <h3 class="section-heading">🃏 Vocabulary Cards</h3>
+                <div class="vocabulary-grid" id="vocabularyGrid">
+                    <!-- Vocabulary cards will be loaded here -->
+                </div>
+                <p class="vocab-note">💡 Tip: Review these cards daily using spaced repetition for better retention</p>
+            </section>
+
+            <!-- Complete Lesson Button -->
+            <div class="lesson-actions">
+                <button class="btn-primary btn-large" id="completeLessonBtn">Complete Lesson</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+        </div>
+    </footer>
+
+    <script src="lesson.js"></script>
+</body>
+</html>
+
