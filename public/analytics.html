@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - QazaqStep</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>QazaqStep</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                <li><a href="analytics.html" class="active">Analytics</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="analytics-section">
+            <div class="container">
+                <h2 class="page-title">Your Learning Analytics</h2>
+
+                <!-- Overall Stats -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Lessons Completed</div>
+                                <div class="stat-value" id="lessonsCompleted">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Total Points</div>
+                                <div class="stat-value" id="totalPoints">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Current Streak</div>
+                                <div class="stat-value" id="currentStreak">0 days</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Average Score</div>
+                                <div class="stat-value" id="averageScore">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Weekly Progress -->
+                <section class="analytics-card">
+                    <h3>This Week's Progress</h3>
+                    <div class="weekly-stats">
+                        <div class="weekly-item">
+                            <span class="label">Lessons Done</span>
+                            <span class="value" id="weeklyLessons">0/7</span>
+                        </div>
+                        <div class="weekly-item">
+                            <span class="label">Points Earned</span>
+                            <span class="value" id="weeklyPoints">0</span>
+                        </div>
+                        <div class="weekly-item">
+                            <span class="label">Progress</span>
+                            <span class="value" id="weeklyProgress">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="weeklyProgressFill" class="progress-fill"></div>
+                    </div>
+                </section>
+
+                <!-- Weak Topics -->
+                <section class="analytics-card">
+                    <h3>Topics to Review</h3>
+                    <div id="weakTopicsContainer" class="topics-list">
+                        <p class="empty-state">No weak topics. Keep it up! 🎉</p>
+                    </div>
+                </section>
+
+                <!-- Vocabulary Stats -->
+                <section class="analytics-card">
+                    <h3>Vocabulary Progress</h3>
+                    <div id="vocabStatsContainer" class="vocab-stats">
+                        <div class="vocab-stat">
+                            <span class="label">Total Cards</span>
+                            <span class="value" id="totalCards">0</span>
+                        </div>
+                        <div class="vocab-stat">
+                            <span class="label">Easy</span>
+                            <span class="value" id="easyCards">0</span>
+                        </div>
+                        <div class="vocab-stat">
+                            <span class="label">Medium</span>
+                            <span class="value" id="mediumCards">0</span>
+                        </div>
+                        <div class="vocab-stat">
+                            <span class="label">Hard</span>
+                            <span class="value" id="hardCards">0</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Monthly Stats -->
+                <section class="analytics-card">
+                    <h3>Monthly Overview</h3>
+                    <div class="monthly-stats">
+                        <div class="monthly-item">
+                            <span class="label">Total Lessons</span>
+                            <span class="value" id="monthlyLessons">0</span>
+                        </div>
+                        <div class="monthly-item">
+                            <span class="label">Total Points</span>
+                            <span class="value" id="monthlyPoints">0</span>
+                        </div>
+                        <div class="monthly-item">
+                            <span class="label">Avg per Week</span>
+                            <span class="value" id="avgPerWeek">0</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="analytics.js"></script>
+</body>
+</html>

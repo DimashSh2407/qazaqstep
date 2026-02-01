@@ -1,6 +1,5 @@
 // QazaqStep - Single Lesson Page JavaScript
-
-const API_BASE = 'http://localhost:3000/api';
+// API_BASE already defined in auth.js
 
 let currentLesson = null;
 let userAnswers = {};
@@ -281,56 +280,71 @@ function updateStreak() {
 }
 
 // Complete lesson
-function completeLesson() {
+async function completeLesson() {
     if (!currentLesson) {
         console.error('No current lesson found');
         alert('Error: Lesson not loaded. Please refresh the page.');
         return;
     }
 
-    const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || {
-        completedLessons: [],
-        streak: 0,
-        points: 0
-    };
-
-    // Add lesson to completed if not already
-    if (!progress.completedLessons.includes(currentLesson._id)) {
-        progress.completedLessons.push(currentLesson._id);
-        
-        // Update streak (simplified - in real app, would check dates)
-        progress.streak = (progress.streak || 0) + 1;
-        
-        // Add completion bonus
-        progress.points = (progress.points || 0) + 50;
-        
-        localStorage.setItem('qazaqstep_progress', JSON.stringify(progress));
+    // Calculate score based on completed mini-tests (simplified)
+    let totalScore = 100;
+    const testResults = JSON.parse(sessionStorage.getItem('testResults')) || {};
+    if (Object.keys(testResults).length > 0) {
+        const scores = Object.values(testResults);
+        totalScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
     }
 
-    // Update progress bar
-    const progressFill = document.getElementById('lessonProgressFill');
-    if (progressFill) {
-        progressFill.style.width = '100%';
-    }
+    const timeSpent = Math.round((Date.now() - (window.lessonStartTime || Date.now())) / 1000);
 
-    // Update points display
-    updatePoints(0);
-    updateStreak();
+    // Use apiCall helper (adds token) and robust ID handling
+    const lessonId = currentLesson._id || currentLesson.id || currentLesson;
 
-    // Show success message
-    const completeBtn = document.getElementById('completeLessonBtn');
-    if (completeBtn) {
-        completeBtn.textContent = '✓ Lesson Completed!';
-        completeBtn.style.backgroundColor = '#4CAF50';
-        completeBtn.disabled = true;
+    try {
+        const response = await apiCall(`/lessons/${lessonId}/complete`, {
+            method: 'POST',
+            body: JSON.stringify({ score: totalScore, timeSpent: timeSpent, errors: [] })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            console.error('Server error completing lesson:', data);
+            alert(data && data.error ? `Failed: ${data.error}` : 'Failed to complete lesson.');
+            return;
+        }
+
+        console.log('Lesson marked as complete:', data);
+
+        // Update local progress
+        const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [], streak: 0, points: 0 };
+        const idStr = String(lessonId);
+
+        if (!progress.completedLessons.includes(idStr)) {
+            progress.completedLessons.push(idStr);
+            progress.streak = (progress.streak || 0) + 1;
+            progress.points = (progress.points || 0) + (data.pointsEarned || 50);
+            localStorage.setItem('qazaqstep_progress', JSON.stringify(progress));
+        }
+
+        // Update UI
+        const progressFill = document.getElementById('lessonProgressFill');
+        if (progressFill) progressFill.style.width = '100%';
+        updatePoints(0);
+        updateStreak();
+
+        const completeBtn = document.getElementById('completeLessonBtn');
+        if (completeBtn) {
+            completeBtn.textContent = '✓ Lesson Completed!';
+            completeBtn.style.backgroundColor = '#4CAF50';
+            completeBtn.disabled = true;
+        }
+
+        alert('🎉 Lesson completed! You earned points!');
+        setTimeout(() => { window.location.href = 'lessons.html'; }, 1500);
+    } catch (err) {
+        console.error('Error completing lesson:', err);
+        alert('Failed to complete lesson. Please try again.');
     }
-    
-    alert('🎉 Lesson completed! You earned 50 bonus points!');
-    
-    // Redirect to lessons page after 2 seconds
-    setTimeout(() => {
-        window.location.href = 'lessons.html';
-    }, 2000);
 }
 
 // Show error message

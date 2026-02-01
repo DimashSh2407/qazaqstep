@@ -1,6 +1,5 @@
 // QazaqStep - Lessons List Page JavaScript
-
-const API_BASE = 'http://localhost:3000/api';
+// API_BASE already defined in auth.js
 
 // Load lessons on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fetch and display all lessons
 function loadLessons() {
+    // Get current user's level
+    const user = getCurrentUser();
+    const userLevel = user ? user.level : null;
+    
     fetch(`${API_BASE}/lessons`, {
         method: 'GET',
         headers: {
@@ -25,7 +28,10 @@ function loadLessons() {
         .then(lessons => {
             // Cache lessons for offline use
             localStorage.setItem('qazaqstep_cached_lessons', JSON.stringify(lessons));
-            displayLessons(lessons);
+            
+            // Filter lessons by user level
+            const filteredLessons = filterLessonsByLevel(lessons, userLevel);
+            displayLessons(filteredLessons, userLevel);
         })
         .catch(err => {
             console.error('Error loading lessons:', err);
@@ -34,7 +40,10 @@ function loadLessons() {
             if (cachedLessons) {
                 try {
                     const lessons = JSON.parse(cachedLessons);
-                    displayLessons(lessons);
+                    const user = getCurrentUser();
+                    const userLevel = user ? user.level : null;
+                    const filteredLessons = filterLessonsByLevel(lessons, userLevel);
+                    displayLessons(filteredLessons, userLevel);
                     const grid = document.getElementById('lessonsGrid');
                     if (grid) {
                         const warning = document.createElement('div');
@@ -51,6 +60,29 @@ function loadLessons() {
         });
 }
 
+// Filter lessons based on user's level
+function filterLessonsByLevel(lessons, userLevel) {
+    if (!userLevel) {
+        // If no level, show all lessons (shouldn't happen after placement)
+        return lessons;
+    }
+    
+    // Level hierarchy for filtering
+    const levelHierarchy = {
+        'A0': ['A0', 'A1'],
+        'A1': ['A1', 'A2'],
+        'A2': ['A2', 'B1'],
+        'B1': ['B1', 'B2'],
+        'B2': ['B2']
+    };
+    
+    const availableLevels = levelHierarchy[userLevel] || [userLevel];
+    
+    return lessons.filter(lesson => 
+        availableLevels.includes(lesson.level)
+    );
+}
+
 function showError() {
     const grid = document.getElementById('lessonsGrid');
     if (grid) {
@@ -59,12 +91,19 @@ function showError() {
 }
 
 // Display lessons in grid
-function displayLessons(lessons) {
+function displayLessons(lessons, userLevel) {
     const grid = document.getElementById('lessonsGrid');
+    const header = document.querySelector('.page-title') || document.querySelector('h2');
+    
     if (!grid) return;
 
+    // Update header to show user level
+    if (header && userLevel) {
+        header.textContent = `Lessons for Level ${userLevel}`;
+    }
+
     if (lessons.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; color: #666;">No lessons available.</p>';
+        grid.innerHTML = '<p style="text-align: center; color: #666;">No lessons available for your level. Complete more lessons to unlock higher levels!</p>';
         return;
     }
 
@@ -73,18 +112,19 @@ function displayLessons(lessons) {
     };
 
     grid.innerHTML = lessons.map(lesson => {
-        const isCompleted = progress.completedLessons.includes(lesson._id);
-        const skillsHTML = lesson.skills ? lesson.skills.map(skill => 
+        const lessonId = lesson._id || lesson.id || '';
+        const isCompleted = lessonId && progress.completedLessons ? progress.completedLessons.includes(lessonId) : false;
+        const skillsHTML = lesson.skills && lesson.skills.length > 0 ? lesson.skills.map(skill => 
             `<span class="skill-tag">${skill}</span>`
         ).join('') : '';
 
         return `
             <div class="lesson-card">
                 <div class="lesson-card-header">
-                    <h3 class="lesson-card-title">${lesson.title}</h3>
+                    <h3 class="lesson-card-title">${lesson.title || 'Untitled'}</h3>
                     <div class="lesson-card-meta">
-                        <span class="lesson-badge badge-level">${lesson.level}</span>
-                        <span class="lesson-badge badge-duration">${lesson.duration} min</span>
+                        <span class="lesson-badge badge-level">${lesson.level || 'A1'}</span>
+                        <span class="lesson-badge badge-duration">${lesson.duration || 15} min</span>
                         ${isCompleted ? '<span class="lesson-badge" style="background-color: #4CAF50; color: white;">✓ Completed</span>' : ''}
                     </div>
                 </div>
@@ -92,7 +132,7 @@ function displayLessons(lessons) {
                     ${skillsHTML}
                 </div>
                 <div class="lesson-card-footer">
-                    <button class="btn-primary" onclick="startLesson('${lesson._id}')">
+                    <button class="btn-primary" onclick="startLesson('${lessonId}')">
                         ${isCompleted ? 'Review Lesson' : 'Start Lesson'}
                     </button>
                 </div>

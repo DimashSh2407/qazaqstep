@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Test - QazaqStep</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>QazaqStep</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="placement-section">
+            <div class="container">
+                <div id="placementContainer">
+                    <h2>Your Kazakh Level Assessment</h2>
+                    <p class="placement-subtitle">Let's determine your Kazakh proficiency level to personalize your learning path</p>
+                    
+                    <div id="loadingSpinner" class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Loading placement test questions...</p>
+                    </div>
+
+                    <div id="testContent" style="display: none;">
+                        <div class="progress-indicator">
+                            <div id="progressBar" class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="progressText" class="progress-text">Question 1 of 6</p>
+                        </div>
+
+                        <form id="placementForm" class="placement-form">
+                            <div id="questionsContainer"></div>
+                            
+                            <div class="placement-actions">
+                                <button type="button" id="prevBtn" class="btn-secondary" style="display: none;">← Previous</button>
+                                <button type="button" id="nextBtn" class="btn-primary">Next →</button>
+                                <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">Submit Test</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="resultContent" style="display: none;">
+                        <div class="result-card">
+                            <h3>Your Level: <span id="levelBadge" class="level-badge"></span></h3>
+                            <p id="levelDescription" class="level-description"></p>
+                            
+                            <div class="result-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Correct Answers</span>
+                                    <span class="stat-value" id="correctCount">0/6</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Score</span>
+                                    <span class="stat-value" id="scorePercent">0%</span>
+                                </div>
+                            </div>
+
+                            <div id="recommendations" class="recommendations">
+                                <h4>Personalized Recommendations</h4>
+                                <p id="recommendationText"></p>
+                            </div>
+
+                            <button onclick="window.location.href='/'" class="btn-primary btn-block">Start Learning</button>
+                        </div>
+                    </div>
+
+                    <div id="errorContent" style="display: none;">
+                        <div class="error-box">
+                            <h3>Error Loading Test</h3>
+                            <p id="errorText"></p>
+                            <button onclick="location.reload()" class="btn-primary">Retry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="placement.js"></script>
+</body>
+</html>
