@@ -24,12 +24,27 @@ mongoose.connect(MONGODB_URI, {
 
 // Routes
 const lessonsRoutes = require('./routes/lessons');
-app.use('/api/lessons', lessonsRoutes);
+const { router: authRoutes } = require('./routes/auth');
+const placementRoutes = require('./routes/placement');
+const vocabularyRoutes = require('./routes/vocabulary');
+const analyticsRoutes = require('./routes/analytics');
+const { router: badgesRoutes } = require('./routes/badges');
 
-// Progress route (mock implementation)
+app.use('/api/lessons', lessonsRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/placement', placementRoutes);
+app.use('/api/vocabulary', vocabularyRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/badges', badgesRoutes);
+
+// Progress route (legacy, kept for compatibility)
 app.post('/api/progress', (req, res) => {
-  // Mock implementation - in real app, would save to database
   res.json({ success: true, message: 'Progress saved' });
+});
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Server is running' });
 });
 
 // Serve specific HTML pages

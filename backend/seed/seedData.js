@@ -619,6 +619,110 @@ const lessons = [
       'Үйіңіз - Your house'
     ],
     skills: ['grammar', 'vocabulary']
+  },
+  // B1 level lessons
+  {
+    title: 'Past Tense Verbs (Extended)',
+    level: 'B1',
+    duration: 25,
+    grammarText: 'В казахском языке прошедшее время имеет несколько форм в зависимости от контекста. "Жаздым" (I wrote) — простое прошедшее, "жазып жүрдім" (I was writing) — продолженное прошедшее. Давайте изучим разницу между совершённым и несовершённым видами.',
+    example: 'Мен кітап жаздым (I wrote a book - completed action). Мен кітап жазып жүрдім (I was writing a book - ongoing action).',
+    audioUrl: '/audio/past-tense-extended.mp3',
+    testQuestions: [
+      { question: 'Какая форма используется для законченного действия в прошлом?', options: ['жаздым', 'жазатын', 'жазамын', 'жаза берді'], correctAnswer: 0 },
+      { question: '"Ол сағаттар бойы оқып жүрді" означает?', options: ['Он читал', 'Он читает', 'Он был на чтении в течение часов', 'Он будет читать'], correctAnswer: 2 },
+      { question: 'Как выражается повторяющееся действие в прошлом?', options: ['қайталап жазды', 'жаза берді', 'жазатын болды', 'жазса'], correctAnswer: 1 },
+      { question: '"Сіз бұл кітапты оқыдыңыз ба?" — это вопрос о?', options: ['Будущем', 'Настоящем', 'Прошлом', 'Условном'], correctAnswer: 2 },
+      { question: 'Какой суффикс указывает на "был" (находился в состоянии)?', options: ['-ды', '-еді', '-ған', '-мақ'], correctAnswer: 2 }
+    ],
+    vocabularyCards: ['Жаздым - I wrote', 'Жазып жүрдім - I was writing', 'Оқыдым - I read', 'Келдім - I came', 'Бардым - I went'],
+    skills: ['grammar', 'past-tense']
+  },
+  {
+    title: 'Conditional Mood (If-Then)',
+    level: 'B1',
+    duration: 22,
+    grammarText: 'Условное наклонение в казахском выражается различными формами. "Егер... болса" переводится как "если... то". Пример: "Егер сіз ұйда болсаңыз, мен келемін" (If you are at home, I will come). Это выражает гипотетические ситуации.',
+    example: 'Егер қышта өте суық болса, мектеп жабық болады (If it is very cold in winter, school is closed).',
+    audioUrl: '/audio/conditional.mp3',
+    testQuestions: [
+      { question: 'Какая структура используется для условных предложений?', options: ['Егер...болса', 'Әгер...едің', 'Ақ...екі', 'Мін...есіңіз'], correctAnswer: 0 },
+      { question: '"Егер ол өніктіктігі болса, ол өнді деп танымас еді" выражает?', options: ['Реальное условие', 'Нереальное условие', 'Вероятное условие', 'Необходимое условие'], correctAnswer: 1 },
+      { question: 'Как переводится "Егер сіз келсеңіз, мен сізді көрем"?', options: ['Если вы придёте, я вас буду видеть', 'Если вы пришли, я вас вижу', 'Если вы не придёте, я вас увижу', 'Если вы пришли, я видел вас'], correctAnswer: 0 },
+      { question: 'Для выражения нереального условия используется форма?', options: ['-са/-се', '-еді', '-ған еді', '-шы/-шей'], correctAnswer: 2 },
+      { question: '"Егер сіз уақыт болса, сіз өнді аладыңыз" означает?', options: ['Если у вас есть время, вы возьмёте искусство', 'Если вы были вовремя, вы получили искусство', 'Если бы у вас было время, вы бы получили искусство', 'Если вы были вовремя, вы получаете искусство'], correctAnswer: 0 }
+    ],
+    vocabularyCards: ['Егер - If', 'Болса - Then/Would be', 'Өніктік - Talent', 'Сәтті - Successful', 'Әрекет - Action'],
+    skills: ['grammar', 'conditional']
+  },
+  {
+    title: 'Professional Language & Business Vocabulary',
+    level: 'B1',
+    duration: 20,
+    grammarText: 'Профессиональный казахский включает специальную лексику для бизнеса, встреч и деловой переписки. "Ресми құжат" (official document), "меморандум" (memorandum), "қатысушы" (participant), "күн тәртібі" (agenda). Формальные структуры различаются от повседневной речи.',
+    example: 'Ресми сөйлесінді уақыт бойынша бастайды (The official meeting starts on time). Күн тәртібінің бірінші нүктесі анықталды (The first item on the agenda is determined).',
+    audioUrl: '/audio/business-language.mp3',
+    testQuestions: [
+      { question: 'Что означает "ресми құжат"?', options: ['Неофициальное письмо', 'Официальный документ', 'Личный дневник', 'Газета'], correctAnswer: 1 },
+      { question: '"Меморандум" это?', options: ['Служебная записка', 'Книга', 'Квитанция', 'Подпись'], correctAnswer: 0 },
+      { question: 'Кто такой "қатысушы"?', options: ['Организатор', 'Участник', 'Зритель', 'Судья'], correctAnswer: 1 },
+      { question: '"Күн тәртібі" переводится как?', options: ['Список задач', 'Время года', 'Повестка дня', 'Тип дня'], correctAnswer: 2 },
+      { question: 'Формальное приветствие в офисе: "_____ алаңыз"', options: ['Сәлем', 'Сәлемдесулі', 'Құрметпен', 'Ынамдап'], correctAnswer: 2 }
+    ],
+    vocabularyCards: ['Ресми - Official', 'Құжат - Document', 'Меморандум - Memo', 'Қатысушы - Participant', 'Күн тәртібі - Agenda', 'Жиын - Meeting'],
+    skills: ['vocabulary', 'business']
+  },
+  // B2 level lessons
+  {
+    title: 'Complex Narrative Structures',
+    level: 'B2',
+    duration: 30,
+    grammarText: 'Сложные повествовательные структуры включают использование нескольких придаточных предложений, косвенной речи и модальных конструкций. "Ол айтты деп білемін..." (I know that he said...). Эти конструкции критичны для рассказов и описаний.',
+    example: 'Ол күнде оқыған сабақтың өндіктігін түсінді және сұрақтарын қойды (He understood the value of the lesson he studied that day and asked questions). Мен сыны көргенде, ғалым болғысы келді деп ойладым (When I saw the exhibition, I thought I wanted to become a scientist).',
+    audioUrl: '/audio/narrative-structures.mp3',
+    testQuestions: [
+      { question: 'Что выражает "деп білемін" в казахском?', options: ['Надежду', 'Знание о чужом высказывании', 'Сомнение', 'Предположение'], correctAnswer: 1 },
+      { question: 'Косвенная речь в казахском использует?', options: ['Прямые кавычки', 'Суффикс -деі или -дей', 'Только точку с запятой', 'Специальные скобки'], correctAnswer: 1 },
+      { question: 'Какова функция причастной формы -ған в повествовании?', options: ['Обозначает будущее', 'Создаёт фон для действия', 'Указывает на условие', 'Выражает совет'], correctAnswer: 1 },
+      { question: '"Ол өнді көруге барғысы келді деп айтты" означает?', options: ['Он ходил посмотреть искусство', 'Он сказал, что хочет пойти посмотреть искусство', 'Он пошел смотреть искусство', 'Он смотрел искусство'], correctAnswer: 1 },
+      { question: 'Что создаёт сложность в повествовании?', options: ['Простые слова', 'Связь между событиями через придаточные', 'Короткие предложения', 'Один глагол'], correctAnswer: 1 }
+    ],
+    vocabularyCards: ['Деп - That (indirect speech marker)', 'Өндіктіктігін - Its/his value', 'Түсіну - To understand', 'Сабақ - Lesson', 'Қайта айту - To retell', 'Придаточное предложение - Subordinate clause'],
+    skills: ['grammar', 'narrative', 'reading']
+  },
+  {
+    title: 'Formal Business Communication',
+    level: 'B2',
+    duration: 28,
+    grammarText: 'Формальная деловая коммуникация требует использования определённых клише, вежливых форм и структурированных предложений. "Құрметті сауда серіктесім" (Уважаемый деловой партнер), "ұсынамын" (предлагаю), "келісемін" (согласен). Эти фразы критичны для писем и переговоров.',
+    example: 'Құрметті сауда серіктесім! Сіздің ұсынып отырған жобаға құлық та құн берсем келеді. Айталық, екі апта ішінде қарап өтемін. (Dear business partner! I would like to consider the project you are proposing. Let\'s say I will review it within two weeks.)',
+    audioUrl: '/audio/formal-business.mp3',
+    testQuestions: [
+      { question: 'Как начинается формальное деловое письмо?', options: ['Сәлем!', 'Құрметті...', 'Привет!', 'Хай!'], correctAnswer: 1 },
+      { question: '"Ұсынамын" в деловом контексте означает?', options: ['Советую', 'Предлагаю', 'Требую', 'Прошу прощения'], correctAnswer: 1 },
+      { question: 'Какой фразой выражается согласие в письме?', options: ['Келісемін', 'Келмейді', 'Келсе де', 'Келген'], correctAnswer: 0 },
+      { question: 'Как формально выражается отказ?', options: ['Жоқ', 'Мүмкін емес', 'Ұсынған идеяның мүмкіндігін ескере алмаймын', 'Нобай'], correctAnswer: 2 },
+      { question: 'Что означает "екі апта ішінде"?', options: ['За месяц', 'В течение двух недель', 'Два дня', 'Две минуты'], correctAnswer: 1 }
+    ],
+    vocabularyCards: ['Құрметті - Dear/Respected', 'Ұсынамын - I propose', 'Келісемін - I agree', 'Келісу - Agreement', 'Сөйлесу - Discussion', 'Құжат - Document'],
+    skills: ['vocabulary', 'business', 'writing']
+  },
+  {
+    title: 'Literary Analysis & Complex Texts',
+    level: 'B2',
+    duration: 35,
+    grammarText: 'Анализ литературных текстов требует понимания метафор, символизма и авторского стиля. "Образное выражение" (фраза-образ), "символ" (символ), "мотив" (мотив). Казахская литература богата традиционными образами: степь, конь, закат. Понимание этих элементов критично для глубокого восприятия текста.',
+    example: 'Абайдың өлеңінде "жер-жерге сіңіп кеткен шерлік" метафорасы ерліктің сінімсіндігін білдіреді (In Abay\'s poem, the metaphor "courage seeping into the earth" conveys the endurance of valor). Достоевский сияқты, Абай та адамдық рухын ашып көрсетеді.',
+    audioUrl: '/audio/literary-analysis.mp3',
+    testQuestions: [
+      { question: 'Что такое "метафора" в литературе?', options: ['Прямое описание', 'Переносное значение слова', 'Повтор слова', 'Вопрос'], correctAnswer: 1 },
+      { question: 'Какой образ часто встречается в казахской поэзии?', options: ['Город', 'Степь', 'Небоскрёб', 'Фабрика'], correctAnswer: 1 },
+      { question: '"Символ" в текст вносит?', options: ['Юмор', 'Глубокое значение', 'Скуку', 'Объём'], correctAnswer: 1 },
+      { question: 'Абайдың жай ықпалында неліктен атадамыз?', options: ['Қараңғы болғандықтан', 'Өмірдің қайшылығын сезінген', 'Көңіл түндей болғандықтан', 'Өлеңнің ұзын болғандықтан'], correctAnswer: 1 },
+      { question: 'Мотив в произведении это?', options: ['Главная идея', 'Повторяющаяся тема или образ', 'Название книги', 'Имя автора'], correctAnswer: 1 }
+    ],
+    vocabularyCards: ['Метафора - Metaphor', 'Символ - Symbol', 'Мотив - Motif', 'Өлең - Poem', 'Салмақты - Weighty', 'Ерлік - Courage', 'Қайшылық - Contradiction'],
+    skills: ['literature', 'reading', 'analysis']
   }
 ];
 
