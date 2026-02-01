@@ -1,7 +1,6 @@
 // QazaqStep - Authentication JavaScript
 
-const API_BASE = 'http://localhost:3000/api';
-
+const API_BASE = '/api';
 // Initialize auth on page load
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
