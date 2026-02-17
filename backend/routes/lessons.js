@@ -9,6 +9,7 @@ const { checkAndAwardBadges } = require('./badges');
 router.get('/', async (req, res) => {
   try {
     const lessons = await Lesson.find().sort({ _id: 1 });
+    console.log(`GET /api/lessons -> found ${lessons.length} lessons`);
     res.json(lessons);
   } catch (error) {
     res.status(500).json({ error: error.message });
