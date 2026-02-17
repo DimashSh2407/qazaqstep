@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -16,9 +18,9 @@
                 <h1>QazaqStep</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="lessons.html">Lessons</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="/" data-i18n="nav_home">Home</a></li>
+                <li><a href="lessons.html" data-i18n="nav_lessons">Lessons</a></li>
+                <li><a href="about.html" class="active" data-i18n="nav_about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -26,41 +28,41 @@
     <main class="main-content">
         <section class="about-section">
             <div class="container">
-                <h2 class="page-title">About QazaqStep</h2>
-                
+                <h2 class="page-title" data-i18n="page_title_about">About QazaqStep</h2>
+
                 <div class="about-card">
-                    <h3>Research-Driven Platform</h3>
-                    <p>
-                        QazaqStep is a research-based Kazakh language learning platform designed to address 
-                        the key challenges identified in existing language learning solutions. Our approach 
+                    <h3 data-i18n="about_research_title">Research-Driven Platform</h3>
+                    <p data-i18n="about_research_text">
+                        QazaqStep is a research-based Kazakh language learning platform designed to address
+                        the key challenges identified in existing language learning solutions. Our approach
                         combines the best practices from educational research with modern EdTech design principles.
                     </p>
                 </div>
 
                 <div class="about-card">
-                    <h3>Problems We Solve</h3>
+                    <h3 data-i18n="about_problems_title">Problems We Solve</h3>
                     <div class="problems-grid">
                         <div class="problem-item">
                             <div class="problem-icon">📚</div>
-                            <h4>Grammar (36.7%)</h4>
-                            <p>
-                                Unlike TilQural, which has weak grammar explanations, QazaqStep provides 
+                            <h4 data-i18n="about_grammar_title">Grammar (36.7%)</h4>
+                            <p data-i18n="about_grammar_text">
+                                Unlike TilQural, which has weak grammar explanations, QazaqStep provides
                                 clear, structured grammar lessons with examples and practice exercises.
                             </p>
                         </div>
                         <div class="problem-item">
                             <div class="problem-icon">🗣️</div>
-                            <h4>Speaking (33.3%)</h4>
-                            <p>
-                                Addressing BilimLand's weakness in speaking practice, we include audio 
+                            <h4 data-i18n="about_speaking_title">Speaking (33.3%)</h4>
+                            <p data-i18n="about_speaking_text">
+                                Addressing BilimLand's weakness in speaking practice, we include audio
                                 dialogues, shadowing exercises, and pronunciation practice in every lesson.
                             </p>
                         </div>
                         <div class="problem-item">
                             <div class="problem-icon">🎮</div>
-                            <h4>Motivation & Gamification (56.7%)</h4>
-                            <p>
-                                Our platform includes points, badges, streaks, and progress tracking to 
+                            <h4 data-i18n="about_motivation_title">Motivation & Gamification (56.7%)</h4>
+                            <p data-i18n="about_motivation_text">
+                                Our platform includes points, badges, streaks, and progress tracking to
                                 keep learners motivated and engaged throughout their journey.
                             </p>
                         </div>
@@ -68,67 +70,78 @@
                 </div>
 
                 <div class="about-card">
-                    <h3>How We Combine Strengths</h3>
+                    <h3 data-i18n="about_combine_title">How We Combine Strengths</h3>
                     <div class="comparison-section">
                         <div class="comparison-item">
-                            <h4>From BilimLand</h4>
+                            <h4 data-i18n="about_bilimland_title">From BilimLand</h4>
                             <ul>
-                                <li>✅ Structured lesson progression</li>
-                                <li>✅ Comprehensive content coverage</li>
-                                <li>✅ User-friendly interface</li>
+                                <li data-i18n="about_bilimland_1">✅ Structured lesson progression</li>
+                                <li data-i18n="about_bilimland_2">✅ Comprehensive content coverage</li>
+                                <li data-i18n="about_bilimland_3">✅ User-friendly interface</li>
                             </ul>
                         </div>
                         <div class="comparison-item">
-                            <h4>From TilQural</h4>
+                            <h4 data-i18n="about_tilqural_title">From TilQural</h4>
                             <ul>
-                                <li>✅ Interactive learning approach</li>
-                                <li>✅ Daily practice opportunities</li>
-                                <li>✅ Cultural context integration</li>
+                                <li data-i18n="about_tilqural_1">✅ Interactive learning approach</li>
+                                <li data-i18n="about_tilqural_2">✅ Daily practice opportunities</li>
+                                <li data-i18n="about_tilqural_3">✅ Cultural context integration</li>
                             </ul>
                         </div>
                         <div class="comparison-item highlight">
-                            <h4>QazaqStep Innovations</h4>
+                            <h4 data-i18n="about_innovations_title">QazaqStep Innovations</h4>
                             <ul>
-                                <li>✨ Clear grammar explanations with examples</li>
-                                <li>✨ Speaking practice with audio dialogues</li>
-                                <li>✨ Gamification system (points, badges, streaks)</li>
-                                <li>✨ Micro-lessons for better retention</li>
-                                <li>✨ Spaced repetition vocabulary cards</li>
-                                <li>✨ Personalized learning paths</li>
+                                <li data-i18n="about_innovations_1">✨ Clear grammar explanations with examples</li>
+                                <li data-i18n="about_innovations_2">✨ Speaking practice with audio dialogues</li>
+                                <li data-i18n="about_innovations_3">✨ Gamification system (points, badges, streaks)</li>
+                                <li data-i18n="about_innovations_4">✨ Micro-lessons for better retention</li>
+                                <li data-i18n="about_innovations_5">✨ Spaced repetition vocabulary cards</li>
+                                <li data-i18n="about_innovations_6">✨ Personalized learning paths</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="about-card">
-                    <h3>Our Methodology</h3>
-                    <p>
-                        QazaqStep uses a micro-learning approach, breaking down complex grammar concepts 
+                    <h3 data-i18n="about_methodology_title">Our Methodology</h3>
+                    <p data-i18n="about_methodology_intro">
+                        QazaqStep uses a micro-learning approach, breaking down complex grammar concepts
                         into digestible lessons. Each lesson includes:
                     </p>
                     <ul class="methodology-list">
-                        <li><strong>Grammar Explanation:</strong> Clear rules with practical examples</li>
-                        <li><strong>Mini Tests:</strong> 5-8 questions with instant feedback</li>
-                        <li><strong>Audio Dialogues:</strong> Real-world conversations for listening and shadowing practice</li>
-                        <li><strong>Vocabulary Cards:</strong> Spaced repetition system for word retention</li>
-                        <li><strong>Progress Tracking:</strong> Visual progress bars and achievement system</li>
+                        <li><strong data-i18n="about_method_grammar_strong">Grammar Explanation:</strong> <span
+                                data-i18n="about_method_grammar_text">Clear rules with practical examples</span></li>
+                        <li><strong data-i18n="about_method_test_strong">Mini Tests:</strong> <span
+                                data-i18n="about_method_test_text">5-8 questions with instant feedback</span></li>
+                        <li><strong data-i18n="about_method_audio_strong">Audio Dialogues:</strong> <span
+                                data-i18n="about_method_audio_text">Real-world conversations for listening and shadowing
+                                practice</span></li>
+                        <li><strong data-i18n="about_method_vocab_strong">Vocabulary Cards:</strong> <span
+                                data-i18n="about_method_vocab_text">Spaced repetition system for word retention</span>
+                        </li>
+                        <li><strong data-i18n="about_method_progress_strong">Progress Tracking:</strong> <span
+                                data-i18n="about_method_progress_text">Visual progress bars and achievement
+                                system</span></li>
                     </ul>
                 </div>
 
                 <div class="about-card">
-                    <h3>Learning Goals</h3>
-                    <p>
+                    <h3 data-i18n="about_goals_title">Learning Goals</h3>
+                    <p data-i18n="about_goals_intro">
                         Choose your learning goal to personalize your experience:
                     </p>
                     <div class="goals-list">
                         <div class="goal-item">
-                            <strong>Study:</strong> Academic-focused lessons with formal language
+                            <strong data-i18n="about_goal_study_strong">Study:</strong> <span
+                                data-i18n="about_goal_study_text">Academic-focused lessons with formal language</span>
                         </div>
                         <div class="goal-item">
-                            <strong>Work:</strong> Business and professional communication
+                            <strong data-i18n="about_goal_work_strong">Work:</strong> <span
+                                data-i18n="about_goal_work_text">Business and professional communication</span>
                         </div>
                         <div class="goal-item">
-                            <strong>Daily Life:</strong> Practical conversations for everyday situations
+                            <strong data-i18n="about_goal_daily_strong">Daily Life:</strong> <span
+                                data-i18n="about_goal_daily_text">Practical conversations for everyday situations</span>
                         </div>
                     </div>
                 </div>
@@ -138,9 +151,10 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+            <p data-i18n="footer_text">&copy; 2024 QazaqStep. Research-driven language learning.</p>
         </div>
     </footer>
+    <script src="js/i18n.js"></script>
 </body>
-</html>
 
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -16,9 +18,9 @@
                 <h1>QazaqStep</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="lessons.html" class="active">Lessons</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="/" data-i18n="nav_home">Home</a></li>
+                <li><a href="lessons.html" class="active" data-i18n="nav_lessons">Lessons</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -26,7 +28,7 @@
     <main class="main-content">
         <section class="lessons-section">
             <div class="container">
-                <h2 class="page-title">All Lessons</h2>
+                <h2 class="page-title" data-i18n="lessons_page_title">All Lessons</h2>
                 <div class="lessons-grid" id="lessonsGrid">
                     <!-- Lessons will be loaded here -->
                 </div>
@@ -36,12 +38,13 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+            <p data-i18n="footer_text">&copy; 2024 QazaqStep. Research-driven language learning.</p>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="auth.js"></script>
     <script src="lessons.js"></script>
 </body>
-</html>
 
+</html>

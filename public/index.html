@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -16,12 +18,14 @@
                 <h1>QazaqStep</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="lessons.html">Lessons</a></li>
-                <li><a href="analytics.html" id="analyticsLink" style="display: none;">Analytics</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="login.html" id="loginLink">Login</a></li>
-                <li><a href="#" id="logoutLink" style="display: none;" onclick="logout()">Logout</a></li>
+                <li><a href="/" class="active" data-i18n="nav_home">Home</a></li>
+                <li><a href="lessons.html" data-i18n="nav_lessons">Lessons</a></li>
+                <li><a href="analytics.html" id="analyticsLink" style="display: none;"
+                        data-i18n="nav_analytics">Analytics</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                <li><a href="login.html" id="loginLink" data-i18n="nav_login">Login</a></li>
+                <li><a href="#" id="logoutLink" style="display: none;" onclick="logout()"
+                        data-i18n="nav_logout">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -30,16 +34,17 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h2 class="hero-title">QazaqStep — Learn Kazakh step by step</h2>
-                <p class="hero-subtitle">Research-driven language learning platform combining grammar, speaking, and gamification</p>
-                
+                <h2 class="hero-title" data-i18n="hero_title">QazaqStep — Learn Kazakh step by step</h2>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Research-driven language learning platform combining
+                    grammar, speaking, and gamification</p>
+
                 <!-- Learning Goal Selector -->
                 <div class="goal-selector">
-                    <label for="learningGoal">Select your learning goal:</label>
+                    <label for="learningGoal" data-i18n="goal_select_label">Select your learning goal:</label>
                     <select id="learningGoal" class="goal-dropdown">
-                        <option value="study">Study</option>
-                        <option value="work">Work</option>
-                        <option value="daily">Daily life</option>
+                        <option value="study" data-i18n="goal_study">Study</option>
+                        <option value="work" data-i18n="goal_work">Work</option>
+                        <option value="daily" data-i18n="goal_daily">Daily life</option>
                     </select>
                 </div>
             </div>
@@ -49,18 +54,18 @@
         <section class="progress-section">
             <div class="container">
                 <div class="progress-card">
-                    <h3>Your Progress</h3>
+                    <h3 data-i18n="progress_title">Your Progress</h3>
                     <div class="progress-stats">
                         <div class="stat-item">
-                            <span class="stat-label">Lessons Completed</span>
+                            <span class="stat-label" data-i18n="stat_lessons">Lessons Completed</span>
                             <span class="stat-value" id="lessonsCompleted">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Current Streak</span>
+                            <span class="stat-label" data-i18n="stat_streak">Current Streak</span>
                             <span class="stat-value" id="currentStreak">0 days</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Total Points</span>
+                            <span class="stat-label" data-i18n="stat_points">Total Points</span>
                             <span class="stat-value" id="totalPoints">0</span>
                         </div>
                     </div>
@@ -68,7 +73,7 @@
                         <div class="progress-bar" id="progressBar">
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
-                        <span class="progress-text" id="progressText">0% Complete</span>
+                        <span class="progress-text" id="progressText" data-i18n="progress_text">0% Complete</span>
                     </div>
                 </div>
             </div>
@@ -77,32 +82,32 @@
         <!-- Quick Access Widgets -->
         <section class="widgets-section">
             <div class="container">
-                <h3 class="section-title">Quick Access</h3>
+                <h3 class="section-title" data-i18n="widgets_title">Quick Access</h3>
                 <div class="widgets-grid">
                     <div class="widget-card" id="todayLessonWidget" onclick="openTodayLesson()">
                         <div class="widget-icon">📚</div>
-                        <h4>Today's Lesson</h4>
-                        <p id="todayLesson">Start your daily lesson</p>
+                        <h4 data-i18n="widget_today_title">Today's Lesson</h4>
+                        <p id="todayLesson" data-i18n="widget_today_desc">Start your daily lesson</p>
                     </div>
                     <div class="widget-card" id="miniTestWidget" onclick="openMiniTest()">
                         <div class="widget-icon">✏️</div>
-                        <h4>Mini Test</h4>
-                        <p id="miniTestInfo">Test your knowledge</p>
+                        <h4 data-i18n="widget_test_title">Mini Test</h4>
+                        <p id="miniTestInfo" data-i18n="widget_test_desc">Test your knowledge</p>
                     </div>
                     <div class="widget-card" id="audioWidget" onclick="openAudioDialogue()">
                         <div class="widget-icon">🎧</div>
-                        <h4>Audio Dialogue</h4>
-                        <p id="audioInfo">Practice listening</p>
+                        <h4 data-i18n="widget_audio_title">Audio Dialogue</h4>
+                        <p id="audioInfo" data-i18n="widget_audio_desc">Practice listening</p>
                     </div>
                     <div class="widget-card" id="vocabWidget" onclick="openVocabulary()">
                         <div class="widget-icon">🃏</div>
-                        <h4>Vocabulary Cards</h4>
-                        <p id="vocabInfo">Review words</p>
+                        <h4 data-i18n="widget_vocab_title">Vocabulary Cards</h4>
+                        <p id="vocabInfo" data-i18n="widget_vocab_desc">Review words</p>
                     </div>
                     <div class="widget-card" id="badgesWidget">
                         <div class="widget-icon">🏆</div>
-                        <h4>Badges</h4>
-                        <p id="badgesCount">0 badges earned</p>
+                        <h4 data-i18n="widget_badges_title">Badges</h4>
+                        <p id="badgesCount" data-i18n="widget_badges_desc">0 badges earned</p>
                     </div>
                 </div>
             </div>
@@ -111,13 +116,14 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+            <p data-i18n="footer_text">&copy; 2024 QazaqStep. Research-driven language learning.</p>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="auth.js"></script>
     <script src="app-auth.js"></script>
     <script src="app.js"></script>
 </body>
-</html>
 
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -16,8 +18,8 @@
                 <h1>QazaqStep</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="/" data-i18n="nav_home">Home</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -27,43 +29,35 @@
             <div class="container">
                 <div class="auth-container">
                     <div class="auth-box">
-                        <h2>Welcome Back to QazaqStep</h2>
-                        <p class="auth-subtitle">Login to continue your learning journey</p>
-                        
+                        <h2 data-i18n="auth_login_title">Welcome Back to QazaqStep</h2>
+                        <p class="auth-subtitle" data-i18n="auth_login_subtitle">Login to continue your learning journey
+                        </p>
+
                         <form id="loginForm" class="auth-form">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    required 
-                                    placeholder="your@email.com"
-                                    class="form-input"
-                                >
+                                <label for="email" data-i18n="auth_email_label">Email</label>
+                                <input type="email" id="email" name="email" required placeholder="your@email.com"
+                                    data-i18n="auth_email_placeholder" class="form-input">
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    name="password" 
-                                    required 
-                                    placeholder="••••••••"
-                                    class="form-input"
-                                >
+                                <label for="password" data-i18n="auth_password_label">Password</label>
+                                <input type="password" id="password" name="password" required placeholder="••••••••"
+                                    data-i18n="auth_password_placeholder" class="form-input">
                             </div>
 
-                            <button type="submit" class="btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn-primary btn-block"
+                                data-i18n="auth_login_btn">Login</button>
 
                             <div id="errorMessage" class="error-message"></div>
                             <div id="successMessage" class="success-message"></div>
                         </form>
 
                         <div class="auth-footer">
-                            <p>Don't have an account? <a href="register.html" class="auth-link">Register here</a></p>
-                            <p><a href="/" class="auth-link">Continue as guest</a></p>
+                            <p><span data-i18n="auth_footer_no_account">Don't have an account?</span> <a
+                                    href="register.html" class="auth-link" data-i18n="auth_link_register">Register
+                                    here</a></p>
+                            <p><a href="/" class="auth-link" data-i18n="auth_link_guest">Continue as guest</a></p>
                         </div>
                     </div>
                 </div>
@@ -73,10 +67,12 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+            <p data-i18n="footer_text">&copy; 2024 QazaqStep. Research-driven language learning.</p>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="auth.js"></script>
 </body>
+
 </html>

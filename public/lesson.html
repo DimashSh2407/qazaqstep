@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
@@ -16,9 +18,9 @@
                 <h1><a href="/" style="text-decoration: none; color: inherit;">QazaqStep</a></h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="lessons.html">Lessons</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="/" data-i18n="nav_home">Home</a></li>
+                <li><a href="lessons.html" data-i18n="nav_lessons">Lessons</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
             </ul>
         </div>
     </nav>
@@ -27,7 +29,7 @@
         <div class="container">
             <!-- Lesson Header -->
             <div class="lesson-header">
-                <a href="lessons.html" class="back-link">← Back to Lessons</a>
+                <a href="lessons.html" class="back-link" data-i18n="lesson_back_link">← Back to Lessons</a>
                 <h2 class="lesson-title" id="lessonTitle">Loading...</h2>
                 <div class="lesson-meta">
                     <span class="lesson-level" id="lessonLevel">A1</span>
@@ -41,18 +43,20 @@
                     <div class="lesson-progress-fill" id="lessonProgressFill"></div>
                 </div>
                 <div class="lesson-stats">
-                    <span>Points: <strong id="lessonPoints">0</strong></span>
-                    <span>Streak: <strong id="lessonStreak">0 days</strong></span>
+                    <span><span data-i18n="lesson_stats_points">Points:</span> <strong
+                            id="lessonPoints">0</strong></span>
+                    <span><span data-i18n="lesson_stats_streak">Streak:</span> <strong id="lessonStreak">0
+                            days</strong></span>
                 </div>
             </div>
 
             <!-- Grammar Section -->
             <section class="lesson-section">
-                <h3 class="section-heading">📖 Grammar</h3>
+                <h3 class="section-heading" data-i18n="lesson_grammar_title">📖 Grammar</h3>
                 <div class="grammar-card">
                     <p class="grammar-text" id="grammarText"></p>
                     <div class="example-box">
-                        <strong>Example:</strong>
+                        <strong data-i18n="lesson_grammar_example_label">Example:</strong>
                         <p id="grammarExample"></p>
                     </div>
                 </div>
@@ -60,55 +64,62 @@
 
             <!-- Test Section -->
             <section class="lesson-section" id="test">
-                <h3 class="section-heading">✏️ Mini Test</h3>
+                <h3 class="section-heading" data-i18n="lesson_test_title">✏️ Mini Test</h3>
                 <div class="test-container" id="testContainer">
                     <!-- Test questions will be loaded here -->
                 </div>
-                <button class="btn-primary" id="checkAnswersBtn" style="display: none;">Check Answers</button>
+                <button class="btn-primary" id="checkAnswersBtn" style="display: none;"
+                    data-i18n="lesson_check_answers_btn">Check Answers</button>
                 <div id="testResults" style="display: none;"></div>
             </section>
 
             <!-- Audio Dialogue Section -->
             <section class="lesson-section" id="audio">
-                <h3 class="section-heading">🎧 Audio Dialogue</h3>
+                <h3 class="section-heading" data-i18n="lesson_audio_title">🎧 Audio Dialogue</h3>
                 <div class="audio-card">
                     <p class="shadowing-instruction">
-                        <strong>Shadowing Practice:</strong> Listen to the dialogue and repeat after the speaker. 
-                        Try to match their pronunciation and rhythm. This helps improve your speaking fluency.
+                        <strong data-i18n="lesson_audio_instruction_strong">Shadowing Practice:</strong> <span
+                            data-i18n="lesson_audio_instruction_text">Listen to the dialogue and repeat after the
+                            speaker. Try to match their pronunciation and rhythm. This helps improve your speaking
+                            fluency.</span>
                     </p>
                     <div class="audio-player">
-                        <button class="btn-primary audio-btn" id="playAudioBtn">
+                        <button class="btn-primary audio-btn" id="playAudioBtn" data-i18n="lesson_play_audio_btn">
                             ▶️ Play Audio
                         </button>
-                        <p class="audio-note">Note: Audio simulation - in production, this would play actual dialogue</p>
+                        <p class="audio-note" data-i18n="lesson_audio_note">Note: Audio simulation - in production, this
+                            would play actual dialogue</p>
                     </div>
                 </div>
             </section>
 
             <!-- Vocabulary Cards Section -->
             <section class="lesson-section" id="vocabulary">
-                <h3 class="section-heading">🃏 Vocabulary Cards</h3>
+                <h3 class="section-heading" data-i18n="lesson_vocabulary_title">🃏 Vocabulary Cards</h3>
                 <div class="vocabulary-grid" id="vocabularyGrid">
                     <!-- Vocabulary cards will be loaded here -->
                 </div>
-                <p class="vocab-note">💡 Tip: Review these cards daily using spaced repetition for better retention</p>
+                <p class="vocab-note" data-i18n="lesson_vocab_tip">💡 Tip: Review these cards daily using spaced
+                    repetition for better retention</p>
             </section>
 
             <!-- Complete Lesson Button -->
             <div class="lesson-actions">
-                <button class="btn-primary btn-large" id="completeLessonBtn">Complete Lesson</button>
+                <button class="btn-primary btn-large" id="completeLessonBtn" data-i18n="lesson_complete_btn">Complete
+                    Lesson</button>
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 QazaqStep. Research-driven language learning.</p>
+            <p data-i18n="footer_text">&copy; 2024 QazaqStep. Research-driven language learning.</p>
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="auth.js"></script>
     <script src="lesson.js"></script>
 </body>
-</html>
 
+</html>
