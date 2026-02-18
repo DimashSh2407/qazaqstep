@@ -9,7 +9,7 @@ let testCompleted = false;
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const lessonId = urlParams.get('id');
-    
+
     if (lessonId) {
         loadLesson(lessonId);
     } else {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupEventListeners();
     updateLessonProgress();
-    
+
     // Scroll to section if hash is present
     setTimeout(() => {
         const hash = window.location.hash;
@@ -222,7 +222,7 @@ function playAudio() {
     if (btn) {
         btn.textContent = '🔊 Playing...';
         btn.disabled = true;
-        
+
         // Simulate audio playback
         setTimeout(() => {
             btn.textContent = '▶️ Play Audio';
@@ -308,8 +308,18 @@ async function completeLesson() {
 
         const data = await response.json();
         if (!response.ok) {
+            // Handle "already completed today" gracefully
+            if (response.status === 400 && data.error && data.error.includes('already completed')) {
+                console.log('Lesson already completed today:', data);
+                const completeBtn = document.getElementById('completeLessonBtn');
+                if (completeBtn) {
+                    completeBtn.textContent = '✓ Lesson Completed!';
+                    completeBtn.style.backgroundColor = '#4CAF50';
+                    completeBtn.disabled = true;
+                }
+                return;
+            }
             console.error('Server error completing lesson:', data);
-            alert(data && data.error ? `Failed: ${data.error}` : 'Failed to complete lesson.');
             return;
         }
 
@@ -343,7 +353,6 @@ async function completeLesson() {
         setTimeout(() => { window.location.href = 'lessons.html'; }, 1500);
     } catch (err) {
         console.error('Error completing lesson:', err);
-        alert('Failed to complete lesson. Please try again.');
     }
 }
 

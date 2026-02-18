@@ -9,49 +9,54 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBadges();
 });
 
-// Load user progress from localStorage
+// Load user progress — fetch from server for authenticated users, fallback to localStorage
 function loadProgress() {
-    const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || {
-        completedLessons: [],
-        streak: 0,
-        points: 0,
-        totalLessons: 0
-    };
-
-    // Fetch total lessons count
+    // First fetch total lessons count (public endpoint)
     fetch(`${API_BASE}/lessons`, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         cache: 'no-cache'
     })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-        })
+        .then(res => res.ok ? res.json() : Promise.reject('Failed to load lessons'))
         .then(lessons => {
-            progress.totalLessons = lessons.length;
-            updateProgressDisplay(progress);
+            const totalLessons = lessons.length;
+
+            // If user is authenticated, fetch real stats from server
+            if (isAuthenticated()) {
+                return apiCall('/analytics/overall-stats')
+                    .then(res => res.ok ? res.json() : Promise.reject('Failed to load stats'))
+                    .then(stats => {
+                        const progress = {
+                            completedLessons: new Array(stats.progress.totalLessonsCompleted || 0),
+                            streak: stats.progress.currentStreak || 0,
+                            points: stats.progress.totalPointsEarned || 0,
+                            totalLessons: totalLessons
+                        };
+                        updateProgressDisplay(progress);
+                    })
+                    .catch(err => {
+                        console.error('Error loading server stats:', err);
+                        loadProgressFromLocalStorage(totalLessons);
+                    });
+            } else {
+                loadProgressFromLocalStorage(totalLessons);
+            }
         })
         .catch(err => {
             console.error('Error loading lessons:', err);
-            // Use cached data if available
-            const cachedLessons = localStorage.getItem('qazaqstep_cached_lessons');
-            if (cachedLessons) {
-                try {
-                    const lessons = JSON.parse(cachedLessons);
-                    progress.totalLessons = lessons.length;
-                } catch (e) {
-                    progress.totalLessons = 10; // Default fallback
-                }
-            } else {
-                progress.totalLessons = 10; // Default fallback
-            }
-            updateProgressDisplay(progress);
+            loadProgressFromLocalStorage(10);
         });
+}
+
+// Fallback: load progress from localStorage
+function loadProgressFromLocalStorage(totalLessons) {
+    const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || {
+        completedLessons: [],
+        streak: 0,
+        points: 0
+    };
+    progress.totalLessons = totalLessons;
+    updateProgressDisplay(progress);
 }
 
 // Update progress display
@@ -63,12 +68,12 @@ function updateProgressDisplay(progress) {
     document.getElementById('lessonsCompleted').textContent = completed;
     document.getElementById('currentStreak').textContent = `${progress.streak} days`;
     document.getElementById('totalPoints').textContent = progress.points;
-    
+
     const progressFill = document.getElementById('progressFill');
     if (progressFill) {
         progressFill.style.width = `${percentage}%`;
     }
-    
+
     const progressText = document.getElementById('progressText');
     if (progressText) {
         progressText.textContent = `${percentage}% Complete`;
@@ -93,18 +98,18 @@ function loadTodayLesson() {
         .then(lessons => {
             // Cache lessons for offline use
             localStorage.setItem('qazaqstep_cached_lessons', JSON.stringify(lessons));
-            
+
             if (lessons.length > 0) {
                 const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || {
                     completedLessons: []
                 };
-                
+
                 // Find first incomplete lesson
                 const incompleteLesson = lessons.find(lesson => {
                     const id = lesson._id || lesson.id;
                     return id && !progress.completedLessons.includes(id);
                 }) || lessons[0];
-                
+
                 const todayLessonEl = document.getElementById('todayLesson');
                 if (todayLessonEl && incompleteLesson && (incompleteLesson._id || incompleteLesson.id)) {
                     todayLessonEl.textContent = incompleteLesson.title || 'Untitled Lesson';
@@ -112,7 +117,7 @@ function loadTodayLesson() {
                     const lessonId = incompleteLesson._id || incompleteLesson.id;
                     todayLessonEl.dataset.lessonId = lessonId;
                 }
-                
+
                 // Update widget info
                 updateWidgetInfo(lessons);
             }
@@ -177,7 +182,7 @@ function updateBadges() {
     };
 
     let badgeCount = 0;
-    
+
     // Calculate badges based on achievements
     if (progress.completedLessons.length >= 1) badgeCount++;
     if (progress.completedLessons.length >= 3) badgeCount++;
@@ -194,9 +199,13 @@ function updateBadges() {
 
 // Quick Access Functions
 function openTodayLesson() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
     const todayLessonEl = document.getElementById('todayLesson');
     const lessonId = todayLessonEl?.dataset.lessonId;
-    
+
     if (lessonId) {
         window.location.href = `lesson.html?id=${lessonId}`;
     } else {
@@ -206,12 +215,44 @@ function openTodayLesson() {
             headers: { 'Content-Type': 'application/json' },
             cache: 'no-cache'
         })
+            .then(res => res.json())
+            .then(lessons => {
+                const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
+                const incompleteLesson = lessons.find(lesson => !progress.completedLessons.includes(lesson._id)) || lessons[0];
+                if (incompleteLesson) {
+                    window.location.href = `lesson.html?id=${incompleteLesson._id}`;
+                } else {
+                    window.location.href = 'lessons.html';
+                }
+            })
+            .catch(() => {
+                window.location.href = 'lessons.html';
+            });
+    }
+}
+
+function openMiniTest() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
+    // Find a lesson with test questions
+    fetch(`${API_BASE}/lessons`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        cache: 'no-cache'
+    })
         .then(res => res.json())
         .then(lessons => {
             const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
-            const incompleteLesson = lessons.find(lesson => !progress.completedLessons.includes(lesson._id)) || lessons[0];
-            if (incompleteLesson) {
-                window.location.href = `lesson.html?id=${incompleteLesson._id}`;
+            const lessonWithTest = lessons.find(lesson => {
+                const id = lesson._id || lesson.id;
+                return lesson.testQuestions && lesson.testQuestions.length > 0 && id && !progress.completedLessons.includes(id);
+            }) || lessons.find(lesson => lesson.testQuestions && lesson.testQuestions.length > 0) || lessons[0];
+
+            if (lessonWithTest && (lessonWithTest._id || lessonWithTest.id)) {
+                const lessonId = lessonWithTest._id || lessonWithTest.id;
+                window.location.href = `lesson.html?id=${lessonId}#test`;
             } else {
                 window.location.href = 'lessons.html';
             }
@@ -219,108 +260,88 @@ function openTodayLesson() {
         .catch(() => {
             window.location.href = 'lessons.html';
         });
-    }
-}
-
-function openMiniTest() {
-    // Find a lesson with test questions
-    fetch(`${API_BASE}/lessons`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        cache: 'no-cache'
-    })
-    .then(res => res.json())
-    .then(lessons => {
-        const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
-        const lessonWithTest = lessons.find(lesson => {
-            const id = lesson._id || lesson.id;
-            return lesson.testQuestions && lesson.testQuestions.length > 0 && id && !progress.completedLessons.includes(id);
-        }) || lessons.find(lesson => lesson.testQuestions && lesson.testQuestions.length > 0) || lessons[0];
-        
-        if (lessonWithTest && (lessonWithTest._id || lessonWithTest.id)) {
-            const lessonId = lessonWithTest._id || lessonWithTest.id;
-            window.location.href = `lesson.html?id=${lessonId}#test`;
-        } else {
-            window.location.href = 'lessons.html';
-        }
-    })
-    .catch(() => {
-        window.location.href = 'lessons.html';
-    });
 }
 
 function openAudioDialogue() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
     // Find a lesson with audio
     fetch(`${API_BASE}/lessons`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-cache'
     })
-    .then(res => res.json())
-    .then(lessons => {
-        const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
-        const lessonWithAudio = lessons.find(lesson => {
-            const id = lesson._id || lesson.id;
-            return lesson.audioUrl && id && !progress.completedLessons.includes(id);
-        }) || lessons.find(lesson => lesson.audioUrl) || lessons[0];
-        
-        if (lessonWithAudio && (lessonWithAudio._id || lessonWithAudio.id)) {
-            const lessonId = lessonWithAudio._id || lessonWithAudio.id;
-            window.location.href = `lesson.html?id=${lessonId}#audio`;
-        } else {
+        .then(res => res.json())
+        .then(lessons => {
+            const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
+            const lessonWithAudio = lessons.find(lesson => {
+                const id = lesson._id || lesson.id;
+                return lesson.audioUrl && id && !progress.completedLessons.includes(id);
+            }) || lessons.find(lesson => lesson.audioUrl) || lessons[0];
+
+            if (lessonWithAudio && (lessonWithAudio._id || lessonWithAudio.id)) {
+                const lessonId = lessonWithAudio._id || lessonWithAudio.id;
+                window.location.href = `lesson.html?id=${lessonId}#audio`;
+            } else {
+                window.location.href = 'lessons.html';
+            }
+        })
+        .catch(() => {
             window.location.href = 'lessons.html';
-        }
-    })
-    .catch(() => {
-        window.location.href = 'lessons.html';
-    });
+        });
 }
 
 function openVocabulary() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
     // Find a lesson with vocabulary cards
     fetch(`${API_BASE}/lessons`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         cache: 'no-cache'
     })
-    .then(res => res.json())
-    .then(lessons => {
-        const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
-        const lessonWithVocab = lessons.find(lesson => {
-            const id = lesson._id || lesson.id;
-            return lesson.vocabularyCards && lesson.vocabularyCards.length > 0 && id && !progress.completedLessons.includes(id);
-        }) || lessons.find(lesson => lesson.vocabularyCards && lesson.vocabularyCards.length > 0) || lessons[0];
-        
-        if (lessonWithVocab && (lessonWithVocab._id || lessonWithVocab.id)) {
-            const lessonId = lessonWithVocab._id || lessonWithVocab.id;
-            window.location.href = `lesson.html?id=${lessonId}#vocabulary`;
-        } else {
+        .then(res => res.json())
+        .then(lessons => {
+            const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
+            const lessonWithVocab = lessons.find(lesson => {
+                const id = lesson._id || lesson.id;
+                return lesson.vocabularyCards && lesson.vocabularyCards.length > 0 && id && !progress.completedLessons.includes(id);
+            }) || lessons.find(lesson => lesson.vocabularyCards && lesson.vocabularyCards.length > 0) || lessons[0];
+
+            if (lessonWithVocab && (lessonWithVocab._id || lessonWithVocab.id)) {
+                const lessonId = lessonWithVocab._id || lessonWithVocab.id;
+                window.location.href = `lesson.html?id=${lessonId}#vocabulary`;
+            } else {
+                window.location.href = 'lessons.html';
+            }
+        })
+        .catch(() => {
             window.location.href = 'lessons.html';
-        }
-    })
-    .catch(() => {
-        window.location.href = 'lessons.html';
-    });
+        });
 }
 
 // Update widget information
 function updateWidgetInfo(lessons) {
     const progress = JSON.parse(localStorage.getItem('qazaqstep_progress')) || { completedLessons: [] };
-    
+
     // Update mini test info
     const testLesson = lessons.find(lesson => lesson.testQuestions && lesson.testQuestions.length > 0);
     const miniTestInfo = document.getElementById('miniTestInfo');
     if (miniTestInfo && testLesson) {
         miniTestInfo.textContent = `${testLesson.testQuestions.length} questions available`;
     }
-    
+
     // Update audio info
     const audioLesson = lessons.find(lesson => lesson.audioUrl);
     const audioInfo = document.getElementById('audioInfo');
     if (audioInfo && audioLesson) {
         audioInfo.textContent = 'Listen and practice';
     }
-    
+
     // Update vocab info
     const vocabLesson = lessons.find(lesson => lesson.vocabularyCards && lesson.vocabularyCards.length > 0);
     const vocabInfo = document.getElementById('vocabInfo');
