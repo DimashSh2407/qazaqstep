@@ -47,6 +47,22 @@ function setupEventListeners() {
     if (playAudioBtn) {
         playAudioBtn.addEventListener('click', playAudio);
     }
+
+    // Memory Game buttons
+    const startGameBtn = document.getElementById('startMemoryGameBtn');
+    if (startGameBtn) {
+        startGameBtn.addEventListener('click', () => {
+            startMemoryGame();
+            startGameBtn.style.display = 'none';
+        });
+    }
+
+    const restartBtn = document.getElementById('memoryRestartBtn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', () => {
+            startMemoryGame();
+        });
+    }
 }
 
 // Fetch and display lesson

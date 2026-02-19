@@ -178,7 +178,20 @@ const translations = {
         "lesson_grammar_example_label": "Example:",
         "lesson_check_answers_btn": "Check Answers",
         "lesson_play_audio_btn": "▶️ Play Audio",
-        "lesson_complete_btn": "Complete Lesson"
+        "lesson_complete_btn": "Complete Lesson",
+        "memory_game_title": "🎮 Memory Game",
+        "memory_game_desc": "Find matching pairs of Kazakh words and their translations!",
+        "memory_game_start_btn": "🎮 Start Game",
+        "memory_game_timer": "⏱ Time",
+        "memory_game_moves": "🔄 Moves",
+        "memory_game_score": "⭐ Pairs",
+        "memory_game_restart": "🔄 Restart",
+        "memory_game_congrats": "Congratulations! 🎉",
+        "memory_game_time": "Time",
+        "memory_game_total_moves": "Moves",
+        "memory_game_points_earned": "Points Earned",
+        "memory_game_play_again": "Play Again",
+        "memory_game_no_vocab": "No vocabulary cards available for this game."
     },
     "ru": {
         "nav_home": "Главная",
@@ -359,7 +372,20 @@ const translations = {
         "lesson_grammar_example_label": "Пример:",
         "lesson_check_answers_btn": "Проверить ответы",
         "lesson_play_audio_btn": "▶️ Воспроизвести аудио",
-        "lesson_complete_btn": "Завершить урок"
+        "lesson_complete_btn": "Завершить урок",
+        "memory_game_title": "🎮 Игра на память",
+        "memory_game_desc": "Найдите совпадающие пары казахских слов и их переводов!",
+        "memory_game_start_btn": "🎮 Начать игру",
+        "memory_game_timer": "⏱ Время",
+        "memory_game_moves": "🔄 Ходы",
+        "memory_game_score": "⭐ Пары",
+        "memory_game_restart": "🔄 Заново",
+        "memory_game_congrats": "Поздравляем! 🎉",
+        "memory_game_time": "Время",
+        "memory_game_total_moves": "Ходы",
+        "memory_game_points_earned": "Заработано очков",
+        "memory_game_play_again": "Играть снова",
+        "memory_game_no_vocab": "Нет словарных карточек для этой игры."
     },
     "kk": {
         "nav_home": "Басты бет",
@@ -540,7 +566,20 @@ const translations = {
         "lesson_grammar_example_label": "Мысалы:",
         "lesson_check_answers_btn": "Жауаптарды тексеру",
         "lesson_play_audio_btn": "▶️ Аудионы ойнату",
-        "lesson_complete_btn": "Сабақты аяқтау"
+        "lesson_complete_btn": "Сабақты аяқтау",
+        "memory_game_title": "🎮 Есте сақтау ойыны",
+        "memory_game_desc": "Қазақ сөздері мен олардың аудармаларының сәйкес жұптарын табыңыз!",
+        "memory_game_start_btn": "🎮 Ойынды бастау",
+        "memory_game_timer": "⏱ Уақыт",
+        "memory_game_moves": "🔄 Жүрістер",
+        "memory_game_score": "⭐ Жұптар",
+        "memory_game_restart": "🔄 Қайта бастау",
+        "memory_game_congrats": "Құттықтаймыз! 🎉",
+        "memory_game_time": "Уақыт",
+        "memory_game_total_moves": "Жүрістер",
+        "memory_game_points_earned": "Жиналған ұпайлар",
+        "memory_game_play_again": "Қайта ойнау",
+        "memory_game_no_vocab": "Бұл ойынға арналған сөздік карточкалары жоқ."
     }
 };
 

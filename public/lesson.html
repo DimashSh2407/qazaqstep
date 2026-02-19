@@ -103,6 +103,43 @@
                     repetition for better retention</p>
             </section>
 
+            <!-- Memory Game Section -->
+            <section class="lesson-section" id="memoryGameSection">
+                <h3 class="section-heading" data-i18n="memory_game_title">🎮 Memory Game</h3>
+                <p class="memory-game-desc" data-i18n="memory_game_desc">Find matching pairs of Kazakh words and their
+                    translations!</p>
+                <button class="btn-primary btn-start-game" id="startMemoryGameBtn" data-i18n="memory_game_start_btn">🎮
+                    Start Game</button>
+
+                <div id="memoryGameContainer" class="memory-game-container" style="display: none;">
+                    <div class="memory-stats-bar">
+                        <div class="memory-stat">
+                            <span class="memory-stat-label" data-i18n="memory_game_timer">⏱ Time</span>
+                            <span class="memory-stat-value" id="memoryTimer">00:00</span>
+                        </div>
+                        <div class="memory-stat">
+                            <span class="memory-stat-label" data-i18n="memory_game_moves">🔄 Moves</span>
+                            <span class="memory-stat-value" id="memoryMoves">0</span>
+                        </div>
+                        <div class="memory-stat">
+                            <span class="memory-stat-label" data-i18n="memory_game_score">⭐ Pairs</span>
+                            <span class="memory-stat-value" id="memoryScore">0/0</span>
+                        </div>
+                    </div>
+
+                    <div class="memory-game-grid" id="memoryGameGrid">
+                        <!-- Cards will be inserted here by JS -->
+                    </div>
+
+                    <button class="btn-secondary memory-restart-btn" id="memoryRestartBtn"
+                        data-i18n="memory_game_restart">🔄 Restart</button>
+                </div>
+
+                <div id="memoryResults" class="memory-results-overlay" style="display: none;">
+                    <!-- Results will be inserted here by JS -->
+                </div>
+            </section>
+
             <!-- Complete Lesson Button -->
             <div class="lesson-actions">
                 <button class="btn-primary btn-large" id="completeLessonBtn" data-i18n="lesson_complete_btn">Complete
@@ -119,6 +156,7 @@
 
     <script src="js/i18n.js"></script>
     <script src="auth.js"></script>
+    <script src="memory-game.js"></script>
     <script src="lesson.js"></script>
 </body>
 
